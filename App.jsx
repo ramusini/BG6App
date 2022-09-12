@@ -2,9 +2,13 @@ import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+import Hello from './src/components/Hello';
+
 export default function App() {
   return (
     <View style={styles.container}>
+      <Hello bang>World</Hello>
+      <Hello style={ { fontSize: 16 } }>Small World</Hello>
       <Text>Open up App.js to start working on your app!</Text>
       {/* 『style』にはオブジェクトが入るべきだが、『StatusBar』の使い方では文字列で指定するため。 */}
       {/* eslint-disable-next-line */}
