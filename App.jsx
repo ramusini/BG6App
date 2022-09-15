@@ -1,10 +1,11 @@
 import React from 'react';
 
-import ListItemScreen from './src/screens/ListItemScreen';
-import ListItemDetailsScreen from './src/screens/ListItemDetailScreen';
+import RecordListScreen from './src/screens/RecordListScreen';
+import RecordDetailScreen from './src/screens/RecordDetailScreen';
+import PlayerListScreen from './src/screens/PlayerListScreen';
 
 export default function App() {
   return (
-    <ListItemDetailsScreen />
+    <RecordListScreen />
   );
 }

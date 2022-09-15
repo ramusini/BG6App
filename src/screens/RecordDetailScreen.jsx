@@ -1,16 +1,13 @@
 import React from 'react';
 import {
-  View,
-  ScrollView,
-  Text,
-  StyleSheet,
+  View, ScrollView, Text, StyleSheet,
 } from 'react-native';
 
 import AppBar from '../components/AppBar';
 import ItemPlayer from '../components/ItemPlayer';
 import CircleButton from '../components/CircleButton';
 
-export default function ListItemDetailsScreen() {
+export default function RecordDetailScreen() {
   return (
     <View style={styles.container}>
       <AppBar />
@@ -23,7 +20,7 @@ export default function ListItemDetailsScreen() {
         <ItemPlayer />
         <Text style={styles.itemMemo}>メモ本文で、ここにはその時ルールをどう間違えたかや、エラッタの適用状況、拡張パックの適用状況を記載する。</Text>
       </ScrollView>
-      <CircleButton style={{ top: 160, bottom: 'auto' }}>+</CircleButton>
+      <CircleButton style={{ top: 160, bottom: 'auto' }} name="plus" />
     </View>
   );
 }

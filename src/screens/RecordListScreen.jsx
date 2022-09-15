@@ -2,15 +2,15 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
 import AppBar from '../components/AppBar';
-import ListItem from '../components/ListItem';
+import RecordListItem from '../components/RecordListItem';
 import CircleButton from '../components/CircleButton';
 
-export default function ListItemScreen() {
+export default function RecordListScreen() {
   return (
     <View style={styles.container}>
       <AppBar />
-      <ListItem />
-      <CircleButton>+</CircleButton>
+      <RecordListItem />
+      <CircleButton name="plus" />
     </View>
   );
 }
