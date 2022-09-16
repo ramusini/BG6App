@@ -20,7 +20,7 @@ export default function RecordDetailScreen() {
         <ItemPlayer />
         <Text style={styles.itemMemo}>メモ本文で、ここにはその時ルールをどう間違えたかや、エラッタの適用状況、拡張パックの適用状況を記載する。</Text>
       </ScrollView>
-      <CircleButton style={{ top: 160, bottom: 'auto' }} name="plus" />
+      <CircleButton style={{ top: 160, bottom: 'auto' }} name="edit-2" />
     </View>
   );
 }
@@ -54,5 +54,6 @@ const styles = StyleSheet.create({
   },
   itemMemo: {
     fontSize: 16,
+    paddingVertical: 8,
   },
 });

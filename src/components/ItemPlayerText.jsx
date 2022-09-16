@@ -1,21 +1,42 @@
 import React from 'react';
-import { Text, StyleSheet } from 'react-native';
-import { string } from 'prop-types';
+import { View, Text, StyleSheet } from 'react-native';
+import { string, number } from 'prop-types';
 
 export default function ItemPlayerText(props) {
-  const { children } = props;
+  const { name, score, rank } = props;
   return (
-    <Text style={styles.itemPlayerText}>{children}</Text>
+    <View style={styles.itemPlayer}>
+      <Text style={styles.itemPlayerName}>{name}</Text>
+      <Text style={styles.itemPlayerScore}>{`${score}点`}</Text>
+      <Text style={styles.itemPlayerRank}>{`${rank}位`}</Text>
+    </View>
   );
 }
 
 ItemPlayerText.propTypes = {
-  children: string.isRequired,
+  name: string,
+  score: number,
+  rank: number,
+};
+
+ItemPlayerText.defaultProps = {
+  name: '',
+  score: '',
+  rank: '',
 };
 
 const styles = StyleSheet.create({
-  itemPlayerText: {
+  itemPlayer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  itemPlayerName: {
     fontSize: 16,
-    lineHeight: 24,
+  },
+  itemPlayerScore: {
+    fontSize: 16,
+  },
+  itemPlayerRank: {
+    fontSize: 16,
   },
 });
