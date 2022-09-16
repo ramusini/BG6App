@@ -47,7 +47,7 @@ export default function RecordEditScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#F0F4F8',
   },
   inputHeader: {
     backgroundColor: '#467FD3',
