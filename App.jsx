@@ -7,6 +7,6 @@ import RecordEditScreen from './src/screens/RecordEditScreen';
 
 export default function App() {
   return (
-    <RecordListScreen />
+    <RecordDetailScreen />
   );
 }

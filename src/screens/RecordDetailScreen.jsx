@@ -2,6 +2,7 @@ import React from 'react';
 import {
   View, ScrollView, Text, StyleSheet,
 } from 'react-native';
+import Modal from 'react-native-modal';
 
 import AppBar from '../components/AppBar';
 import ItemPlayer from '../components/ItemPlayer';
@@ -21,6 +22,13 @@ export default function RecordDetailScreen() {
         <Text style={styles.itemMemo}>メモ本文で、ここにはその時ルールをどう間違えたかや、エラッタの適用状況、拡張パックの適用状況を記載する。</Text>
       </ScrollView>
       <CircleButton style={{ top: 160, bottom: 'auto' }} name="edit-2" />
+      <View>
+        <Modal isVisible={false}>
+          <View style={{ flex: 1, backgroundColor: 'white' }}>
+            <Text>I am the modal content!</Text>
+          </View>
+        </Modal>
+      </View>
     </View>
   );
 }
