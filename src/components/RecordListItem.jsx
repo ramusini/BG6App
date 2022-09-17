@@ -1,19 +1,23 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {
+  StyleSheet, Text, View, TouchableOpacity,
+} from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
 export default function RecordListItem() {
   return (
     <View>
-      <View style={styles.listItem}>
-        <View>
-          <Text style={styles.listItemTitle}>カタン</Text>
-          <Text style={styles.listItemDate}>2022年12月3日 10:00</Text>
+      <TouchableOpacity>
+        <View style={styles.listItem}>
+          <View>
+            <Text style={styles.listItemTitle}>カタン</Text>
+            <Text style={styles.listItemDate}>2022年12月3日 10:00</Text>
+          </View>
+          <View>
+            <Feather name="x" size={16} color="black" />
+          </View>
         </View>
-        <View>
-          <Feather name="x" size={16} color="black" />
-        </View>
-      </View>
+      </TouchableOpacity>
 
       <View style={styles.listItem}>
         <View>

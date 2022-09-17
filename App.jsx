@@ -8,6 +8,6 @@ import RecordCreateScreen from './src/screens/RecordCreateScreen';
 
 export default function App() {
   return (
-    <RecordCreateScreen />
+    <RecordListScreen />
   );
 }

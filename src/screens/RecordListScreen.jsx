@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, StyleSheet, Alert } from 'react-native';
+import {
+  View, StyleSheet, Alert,
+} from 'react-native';
 
 import AppBar from '../components/AppBar';
 import RecordListItem from '../components/RecordListItem';
