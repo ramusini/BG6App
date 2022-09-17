@@ -4,14 +4,14 @@ import {
 } from 'react-native';
 import Modal from 'react-native-modal';
 
-import AppBar from '../components/AppBar';
 import ItemPlayer from '../components/ItemPlayer';
 import CircleButton from '../components/CircleButton';
 
-export default function RecordDetailScreen() {
+export default function RecordDetailScreen(props) {
+  // App.jsxでStack.Screenで囲まれたScreen達は自動的に『navigation』としてpropsに渡せるようになっている。
+  const { navigation } = props;
   return (
     <View style={styles.container}>
-      <AppBar />
       <View style={styles.itemHeader}>
         <Text style={styles.itemTitle}>カタン</Text>
         <Text style={styles.itemDate}>2022年12月4日 10:00</Text>
@@ -21,7 +21,12 @@ export default function RecordDetailScreen() {
         <ItemPlayer />
         <Text style={styles.itemMemo}>メモ本文で、ここにはその時ルールをどう間違えたかや、エラッタの適用状況、拡張パックの適用状況を記載する。</Text>
       </ScrollView>
-      <CircleButton style={{ top: 160, bottom: 'auto' }} name="edit-2" />
+      <CircleButton
+        style={{ top: 60, bottom: 'auto' }}
+        name="edit-2"
+        onPress={() => { navigation.navigate('RecordEdit'); }}
+      />
+
       {/* 仮のモーダル。falseをtrueに変更すると、モーダルが出現する */}
       <View>
         <Modal isVisible={false}>
@@ -31,6 +36,7 @@ export default function RecordDetailScreen() {
         </Modal>
       </View>
       {/* 仮のモーダル */}
+
     </View>
   );
 }

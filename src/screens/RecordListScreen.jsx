@@ -1,18 +1,20 @@
 import React from 'react';
 import {
-  View, StyleSheet, Alert,
+  View, StyleSheet,
 } from 'react-native';
 
-import AppBar from '../components/AppBar';
-import RecordListItem from '../components/RecordListItem';
+import RecordList from '../components/RecordList';
 import CircleButton from '../components/CircleButton';
 
-export default function RecordListScreen() {
+export default function RecordListScreen(props) {
+  const { navigation } = props;
   return (
     <View style={styles.container}>
-      <AppBar />
-      <RecordListItem />
-      <CircleButton name="plus" onPress={() => { Alert.alert('Pressed!'); }} />
+      <RecordList />
+      <CircleButton
+        name="plus"
+        onPress={() => { navigation.navigate('RecordCreate'); }}
+      />
     </View>
   );
 }

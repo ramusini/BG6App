@@ -3,13 +3,12 @@ import {
   View, TextInput, Text, StyleSheet,
 } from 'react-native';
 
-import AppBar from '../components/AppBar';
 import CircleButton from '../components/CircleButton';
 
-export default function RecordEditScreen() {
+export default function RecordEditScreen(props) {
+  const { navigation } = props;
   return (
     <View style={styles.container}>
-      <AppBar />
 
       <View style={styles.inputHeader}>
         <TextInput value="カタン" style={styles.inputTitle} />
@@ -38,7 +37,11 @@ export default function RecordEditScreen() {
         <TextInput value="メモ本文が入る" style={styles.inputMemo} />
       </View>
 
-      <CircleButton style={{ top: 160, bottom: 'auto' }} name="check-square" />
+      <CircleButton
+        style={{ top: 60, bottom: 'auto' }}
+        name="check-square"
+        onPress={() => { navigation.goBack(); }}
+      />
 
     </View>
   );

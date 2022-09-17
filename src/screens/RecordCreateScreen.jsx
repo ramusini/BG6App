@@ -2,12 +2,9 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 
-import AppBar from '../components/AppBar';
-
 export default function RecordCreateScreen() {
   return (
     <View style={styles.container}>
-      <AppBar />
       <View style={styles.createHeader}>
         <Text style={styles.createSearchForm}>
           検索フォーム
