@@ -9,20 +9,15 @@ import PlayerListScreen from './src/screens/PlayerListScreen';
 import RecordEditScreen from './src/screens/RecordEditScreen';
 import RecordCreateScreen from './src/screens/RecordCreateScreen';
 
-const Stack = createStackNavigator();
+import { firebaseConfig } from './env';
 
-const firebaseConfig = {
-  apiKey: 'AIzaSyAQWyxoW0nDYTih7z8mcvjXimxNpHyZIpg',
-  authDomain: 'bg6app.firebaseapp.com',
-  projectId: 'bg6app',
-  storageBucket: 'bg6app.appspot.com',
-  messagingSenderId: '932252110963',
-  appId: '1:932252110963:web:e95a631a1a61a6cef4da06',
-};
+require('firebase/firestore');
 
 if (firebase.apps.length === 0) {
   firebase.initializeApp(firebaseConfig);
 }
+
+const Stack = createStackNavigator();
 
 export default function App() {
   return (
