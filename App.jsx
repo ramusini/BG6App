@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import firebase from 'firebase';
 
 import RecordListScreen from './src/screens/RecordListScreen';
 import RecordDetailScreen from './src/screens/RecordDetailScreen';
@@ -9,6 +10,19 @@ import RecordEditScreen from './src/screens/RecordEditScreen';
 import RecordCreateScreen from './src/screens/RecordCreateScreen';
 
 const Stack = createStackNavigator();
+
+const firebaseConfig = {
+  apiKey: 'AIzaSyAQWyxoW0nDYTih7z8mcvjXimxNpHyZIpg',
+  authDomain: 'bg6app.firebaseapp.com',
+  projectId: 'bg6app',
+  storageBucket: 'bg6app.appspot.com',
+  messagingSenderId: '932252110963',
+  appId: '1:932252110963:web:e95a631a1a61a6cef4da06',
+};
+
+if (firebase.apps.length === 0) {
+  firebase.initializeApp(firebaseConfig);
+}
 
 export default function App() {
   return (
