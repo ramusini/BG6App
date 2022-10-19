@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -14,12 +14,14 @@ import CircleButton from '../components/CircleButton';
 
 export default function RecordCreateScreen(props) {
   const { navigation } = props;
+  const [bodyText, setBodyText] = useState();
 
   function hundlePress() {
     const db = firebase.firestore();
-    const ref = db.collection('memos');
+    const ref = db.collection('records');
     ref.add({
-      bodyText: 'Hello',
+      bodyText,
+      updatedAt: new Date(),
     })
       .then((docRef) => {
         console.log('Created!', docRef.id);
@@ -43,7 +45,12 @@ export default function RecordCreateScreen(props) {
       </View>
       <KeyboardAvoidingView style={styles.container}>
         <View style={styles.inputContainer}>
-          <TextInput value="" multiline style={styles.input} />
+          <TextInput
+            value={bodyText}
+            multiline
+            style={styles.input}
+            onChangeText={(text) => { setBodyText(text); }}
+          />
         </View>
         <CircleButton
           name="check"
