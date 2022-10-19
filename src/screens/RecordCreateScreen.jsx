@@ -69,11 +69,11 @@ const styles = StyleSheet.create({
   inputContainer: {
     paddingHorizontal: 27,
     paddingVertical: 32,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#F0F4F8',
     flex: 1,
   },
   input: {
-    backgroundColor: 'blue',
+    backgroundColor: '#FFFFFF',
     flex: 1,
   },
   createHeader: {
