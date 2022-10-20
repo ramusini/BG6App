@@ -4,62 +4,45 @@ import {
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { shape, string, instanceOf, arrayOf } from 'prop-types';
 
-export default function RecordList() {
+export default function RecordList(props) {
   // ここはScreenではないため、navigationというpropsが渡ってこない？ため、useNavigationを利用。
+  const { records } = props;
   const navigation = useNavigation();
   return (
     <View>
-      <TouchableOpacity
-        style={styles.listItem}
-        onPress={() => { navigation.navigate('RecordDetail'); }}
-      >
-        <View>
-          <Text style={styles.listItemTitle}>カタン</Text>
-          <Text style={styles.listItemDate}>2022年12月3日 10:00</Text>
-        </View>
+      {records.map((record) => (
         <TouchableOpacity
-          onPress={() => { Alert.alert('Are you sure?'); }}
-          style={styles.recordDeleteIcon}
+          // 一意のkeyを付与する必要がある
+          key={record.id}
+          style={styles.listItem}
+          onPress={() => { navigation.navigate('RecordDetail'); }}
         >
-          <Feather name="x" size={16} color="black" />
+          <View>
+            <Text style={styles.listItemTitle}>{record.bodyText}</Text>
+            <Text style={styles.listItemDate}>{String(record.updatedAt)}</Text>
+          </View>
+          <TouchableOpacity
+            onPress={() => { Alert.alert('Are you sure?'); }}
+            style={styles.recordDeleteIcon}
+          >
+            <Feather name="x" size={16} color="black" />
+          </TouchableOpacity>
         </TouchableOpacity>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.listItem}
-        onPress={() => { navigation.navigate('RecordDetail'); }}
-      >
-        <View>
-          <Text style={styles.listItemTitle}>カルカソンヌ</Text>
-          <Text style={styles.listItemDate}>2022年12月3日 10:00</Text>
-        </View>
-        <TouchableOpacity
-          onPress={() => { Alert.alert('Are you sure?'); }}
-          style={styles.recordDeleteIcon}
-        >
-          <Feather name="x" size={16} color="black" />
-        </TouchableOpacity>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.listItem}
-        onPress={() => { navigation.navigate('RecordDetail'); }}
-      >
-        <View>
-          <Text style={styles.listItemTitle}>オーディンの祝祭</Text>
-          <Text style={styles.listItemDate}>2022年12月3日 10:00</Text>
-        </View>
-        <TouchableOpacity
-          onPress={() => { Alert.alert('Are you sure?'); }}
-          style={styles.recordDeleteIcon}
-        >
-          <Feather name="x" size={16} color="black" />
-        </TouchableOpacity>
-      </TouchableOpacity>
+      ))}
     </View>
   );
 }
+
+RecordList.propTypes = {
+  // arrayOfで配列であると定義
+  records: arrayOf(shape({
+    id: string,
+    bodyText: string,
+    updatedAt: instanceOf(Date),
+  })).isRequired,
+};
 
 const styles = StyleSheet.create({
   listItem: {

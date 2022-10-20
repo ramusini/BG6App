@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   StyleSheet,
@@ -11,14 +11,23 @@ import CircleButton from '../components/CircleButton';
 
 export default function RecordListScreen(props) {
   const { navigation } = props;
+  const [records, setRecords] = useState([]);
 
   useEffect(() => {
     const db = firebase.firestore();
     const ref = db.collection('records').orderBy('updatedAt', 'desc');
     const unsubscribe = ref.onSnapshot((snapshot) => {
+      const recordsList = [];
       snapshot.forEach((doc) => {
         console.log(doc.id, doc.data());
+        const data = doc.data();
+        recordsList.push({
+          id: doc.id,
+          bodyText: data.bodyText,
+          updatedAt: data.updatedAt.toDate(),
+        });
       });
+      setRecords(recordsList);
     }, (error) => {
       console.log(error);
       Alert.alert('データの読み込みに失敗しました');
@@ -28,7 +37,7 @@ export default function RecordListScreen(props) {
 
   return (
     <View style={styles.container}>
-      <RecordList />
+      <RecordList records={records} />
       <CircleButton
         name="plus"
         onPress={() => { navigation.navigate('RecordCreate'); }}
