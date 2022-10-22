@@ -30,7 +30,7 @@ export default function RecordList(props) {
         onPress={() => { navigation.navigate('RecordDetail'); }}
       >
         <View>
-          <Text style={styles.listItemTitle} numberOfLines={1}>{item.bodyText}</Text>
+          <Text style={styles.listItemTitle} numberOfLines={1}>{item.titleText}</Text>
           <Text style={styles.listItemDate}>{String(item.updatedAt)}</Text>
         </View>
         <TouchableOpacity

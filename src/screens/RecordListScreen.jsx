@@ -23,6 +23,7 @@ export default function RecordListScreen(props) {
         const data = doc.data();
         recordsList.push({
           id: doc.id,
+          titleText: data.titleText,
           bodyText: data.bodyText,
           updatedAt: data.updatedAt.toDate(),
         });
