@@ -15,11 +15,13 @@ import CircleButton from '../components/CircleButton';
 export default function RecordCreateScreen(props) {
   const { navigation } = props;
   const [bodyText, setBodyText] = useState();
+  const [titleText, setTitleText] = useState();
 
   function hundlePress() {
     const db = firebase.firestore();
     const ref = db.collection('records');
     ref.add({
+      titleText,
       bodyText,
       updatedAt: new Date(),
     })
@@ -46,6 +48,12 @@ export default function RecordCreateScreen(props) {
       <KeyboardAvoidingView style={styles.container}>
         <View style={styles.inputContainer}>
           <TextInput
+            value={titleText}
+            multiline
+            style={styles.input}
+            onChangeText={(text) => { setTitleText(text); }}
+          />
+          <TextInput
             value={bodyText}
             multiline
             style={styles.input}
@@ -70,6 +78,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 27,
     paddingVertical: 32,
     backgroundColor: '#F0F4F8',
+    marginVertical: 5,
     flex: 1,
   },
   input: {

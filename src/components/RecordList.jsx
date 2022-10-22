@@ -1,36 +1,55 @@
 import React from 'react';
 import {
-  StyleSheet, Text, View, TouchableOpacity, Alert,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Alert,
+  FlatList,
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import { shape, string, instanceOf, arrayOf } from 'prop-types';
+import {
+  shape,
+  string,
+  instanceOf,
+  arrayOf,
+} from 'prop-types';
 
 export default function RecordList(props) {
   // ここはScreenではないため、navigationというpropsが渡ってこない？ため、useNavigationを利用。
   const { records } = props;
   const navigation = useNavigation();
-  return (
-    <View>
-      {records.map((record) => (
+
+  function renderItem({ item }) {
+    return (
+      <TouchableOpacity
+        // 一意のkeyを付与する必要がある
+        key={item.id}
+        style={styles.listItem}
+        onPress={() => { navigation.navigate('RecordDetail'); }}
+      >
+        <View>
+          <Text style={styles.listItemTitle} numberOfLines={1}>{item.bodyText}</Text>
+          <Text style={styles.listItemDate}>{String(item.updatedAt)}</Text>
+        </View>
         <TouchableOpacity
-          // 一意のkeyを付与する必要がある
-          key={record.id}
-          style={styles.listItem}
-          onPress={() => { navigation.navigate('RecordDetail'); }}
+          onPress={() => { Alert.alert('Are you sure?'); }}
+          style={styles.recordDeleteIcon}
         >
-          <View>
-            <Text style={styles.listItemTitle}>{record.bodyText}</Text>
-            <Text style={styles.listItemDate}>{String(record.updatedAt)}</Text>
-          </View>
-          <TouchableOpacity
-            onPress={() => { Alert.alert('Are you sure?'); }}
-            style={styles.recordDeleteIcon}
-          >
-            <Feather name="x" size={16} color="black" />
-          </TouchableOpacity>
+          <Feather name="x" size={16} color="black" />
         </TouchableOpacity>
-      ))}
+      </TouchableOpacity>
+    );
+  }
+
+  return (
+    <View style={styles.container}>
+      <FlatList
+        data={records}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id}
+      />
     </View>
   );
 }
@@ -45,6 +64,9 @@ RecordList.propTypes = {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   listItem: {
     backgroundColor: '#ffffff',
     flexDirection: 'row',
