@@ -1,25 +1,55 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View, ScrollView, Text, StyleSheet,
 } from 'react-native';
 import Modal from 'react-native-modal';
+import { shape, string } from 'prop-types';
+
+import firebase from 'firebase';
 
 import ItemPlayer from '../components/ItemPlayer';
 import CircleButton from '../components/CircleButton';
+import { dateToString } from '../utils';
 
 export default function RecordDetailScreen(props) {
   // App.jsxでStack.Screenで囲まれたScreen達は自動的に『navigation』としてpropsに渡せるようになっている。
-  const { navigation } = props;
+  // routeはnavigationと同じく全てのスクリーンで受け取ることができる。routeの中にparamsがあり、今回はparamsの中にidが入っている。
+  const { navigation, route } = props;
+  const { id } = route.params;
+  const [record, setRecord] = useState(null);
+
+  useEffect(() => {
+    // firebaseからデータを取得
+    const db = firebase.firestore();
+    // 取得データから参照データを作成
+    const ref = db.collection('records').doc(id);
+    ref.onSnapshot((doc) => {
+      // コンソールで取得データを確認できる
+      console.log(doc.id, doc.data());
+      // データを定義
+      const data = doc.data();
+      // データを一時的にRecordDetailScreenに保存。上記のuseStateで実行している。
+      setRecord({
+        id: doc.id,
+        titleText: data.titleText,
+        bodyText: data.bodyText,
+        updatedAt: data.updatedAt.toDate(),
+      });
+    });
+  }, []);
+  // 最後の空の配列[]は、画面が表示されたその瞬間だけ実行されるようにするため。
+
   return (
     <View style={styles.container}>
       <View style={styles.itemHeader}>
-        <Text style={styles.itemTitle}>カタン</Text>
-        <Text style={styles.itemDate}>2022年12月4日 10:00</Text>
+        {/* 以下の{record && record.~~}は、recordに該当データが入っていなかった場合でもエラーにならず空白を返してくれる。 */}
+        <Text style={styles.itemTitle}>{record && record.titleText}</Text>
+        <Text style={styles.itemDate}>{record && dateToString(record.updatedAt)}</Text>
       </View>
       <ScrollView style={styles.itemBody}>
-        <Text>ゲーム画像など</Text>
+        <Text>画像など</Text>
         <ItemPlayer />
-        <Text style={styles.itemMemo}>メモ本文で、ここにはその時ルールをどう間違えたかや、エラッタの適用状況、拡張パックの適用状況を記載する。</Text>
+        <Text style={styles.itemMemo}>{record && record.bodyText}</Text>
       </ScrollView>
       <CircleButton
         style={{ top: 60, bottom: 'auto' }}
@@ -40,6 +70,12 @@ export default function RecordDetailScreen(props) {
     </View>
   );
 }
+
+RecordDetailScreen.propTypes = {
+  route: shape({
+    params: shape({ id: string }),
+  }).isRequired,
+};
 
 const styles = StyleSheet.create({
   container: {

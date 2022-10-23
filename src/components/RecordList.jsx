@@ -16,6 +16,8 @@ import {
   arrayOf,
 } from 'prop-types';
 
+import { dateToString } from '../utils';
+
 export default function RecordList(props) {
   // ここはScreenではないため、navigationというpropsが渡ってこない？ため、useNavigationを利用。
   const { records } = props;
@@ -24,14 +26,12 @@ export default function RecordList(props) {
   function renderItem({ item }) {
     return (
       <TouchableOpacity
-        // 一意のkeyを付与する必要がある
-        key={item.id}
         style={styles.listItem}
-        onPress={() => { navigation.navigate('RecordDetail'); }}
+        onPress={() => { navigation.navigate('RecordDetail', { id: item.id }); }}
       >
         <View>
           <Text style={styles.listItemTitle} numberOfLines={1}>{item.titleText}</Text>
-          <Text style={styles.listItemDate}>{String(item.updatedAt)}</Text>
+          <Text style={styles.listItemDate}>{dateToString(item.updatedAt)}</Text>
         </View>
         <TouchableOpacity
           onPress={() => { Alert.alert('Are you sure?'); }}
@@ -58,6 +58,7 @@ RecordList.propTypes = {
   // arrayOfで配列であると定義
   records: arrayOf(shape({
     id: string,
+    titleText: string,
     bodyText: string,
     updatedAt: instanceOf(Date),
   })).isRequired,
