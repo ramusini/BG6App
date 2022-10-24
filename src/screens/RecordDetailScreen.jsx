@@ -54,7 +54,7 @@ export default function RecordDetailScreen(props) {
       <CircleButton
         style={{ top: 60, bottom: 'auto' }}
         name="edit-2"
-        onPress={() => { navigation.navigate('RecordEdit'); }}
+        onPress={() => { navigation.navigate('RecordEdit', { id: record.id, titleText: record.titleText, bodyText: record.bodyText }); }}
       />
 
       {/* 仮のモーダル。falseをtrueに変更すると、モーダルが出現する */}
