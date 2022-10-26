@@ -47,12 +47,14 @@ export default function RecordCreateScreen(props) {
       </View>
       <KeyboardAvoidingView style={styles.container}>
         <View style={styles.inputContainer}>
+          <Text>タイトル</Text>
           <TextInput
             value={titleText}
             multiline
             style={styles.input}
             onChangeText={(text) => { setTitleText(text); }}
           />
+          <Text>メモ</Text>
           <TextInput
             value={bodyText}
             multiline

@@ -6,6 +6,7 @@ import { Feather } from '@expo/vector-icons';
 export default function CircleButton(props) {
   const { style, name, onPress } = props;
   return (
+    // styleがstyles.circleButtonを上書きできる形
     <TouchableOpacity style={[styles.circleButton, style]} onPress={onPress}>
       <Feather name={name} size={32} color="white" />
     </TouchableOpacity>
