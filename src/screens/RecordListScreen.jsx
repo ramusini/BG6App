@@ -9,12 +9,16 @@ import firebase from 'firebase';
 
 import RecordList from '../components/RecordList';
 import CircleButton from '../components/CircleButton';
+import Loading from '../components/Loading';
 
 export default function RecordListScreen(props) {
   const { navigation } = props;
   const [records, setRecords] = useState([]);
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
+    // firebaseを呼び出す直前にローディングをtrueにしている
+    setLoading(true);
     const db = firebase.firestore();
     const ref = db.collection('records').orderBy('updatedAt', 'desc');
     const unsubscribe = ref.onSnapshot((snapshot) => {
@@ -30,8 +34,11 @@ export default function RecordListScreen(props) {
         });
       });
       setRecords(recordsList);
+      // firebaseのデータ読み込み完了したので、ローディングをfalseにしている
+      setLoading(false);
     }, (error) => {
       console.log(error);
+      setLoading(false);
       Alert.alert('データの読み込みに失敗しました');
     });
     return unsubscribe;
@@ -41,6 +48,7 @@ export default function RecordListScreen(props) {
   if (records.length === 0) {
     return (
       <View style={emptyStyles.container}>
+        <Loading isLoading={isLoading} />
         <View style={emptyStyles.inner}>
           <Text style={emptyStyles.title}>最初の記録を作成しよう！</Text>
         </View>
